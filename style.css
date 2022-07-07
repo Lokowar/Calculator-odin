@@ -23,7 +23,7 @@ body {
 .screen {
     background-color: aliceblue;
     width: 370px;
-    height: 100px;
+    height: 50px;
 }
 .special-btn {
     display: flex;
