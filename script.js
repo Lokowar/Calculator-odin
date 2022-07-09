@@ -1,14 +1,17 @@
 $(document).ready(function() {
+    /* Variaveis de operação */
     let x = 0;
     let y;
-    let resolution;
+    let resolution = 0;
 
+    /* Variaveis de HTML */
     let nmb1 = document.getElementById('screen1');
     nmb1.innerHTML = x;
     let op = document.getElementById('screen2');
     let nmb2 = document.getElementById('screen3');
     let res = document.getElementById('screen4');
 
+    /* Funções de operações */
     function soma(x, y){
         return x + y;
     }
@@ -29,6 +32,7 @@ $(document).ready(function() {
         return x;
     }    
 
+    /* Comandos */
     $(".btn").click(function(){
         if(this.textContent === "+" || this.textContent === "-" || this.textContent === "*" || this.textContent === "/"){
             y = x;
@@ -51,31 +55,33 @@ $(document).ready(function() {
         if(this.textContent === "="){
             if(op.innerHTML === "+"){
                 resolution = soma(x, y);
-                res.innerHTML = resolution;
+                res.innerHTML = "="+resolution;
                 x = clear(nmb1, op, nmb2, x, res);
                 return;
             }
             if(op.innerHTML === "-"){
                 resolution = subtração(x, y);
-                res.innerHTML = resolution;
+                res.innerHTML = "="+resolution;
                 x = clear(nmb1, op, nmb2, x, res);
                 return;
             }
             if(op.innerHTML === "*"){
                 resolution = multiplicação(x, y);
-                res.innerHTML = resolution;
+                res.innerHTML = "="+resolution;
                 x = clear(nmb1, op, nmb2, x, res);
                 return;
             }
             if(op.innerHTML === "/"){
-                resolution = divisão(x, y);
-                res.innerHTML = resolution;
+                resolution = divisão(y, x);
+                res.innerHTML = "="+resolution;
                 x = clear(nmb1, op, nmb2, x, res);
                 return;
             }
         }else{
             x += this.textContent;
             x = parseFloat(x);
+            console.log(y);
+            console.log(x);
             nmb1.innerHTML = x;
         }
     });
