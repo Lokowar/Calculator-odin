@@ -24,24 +24,74 @@ $(document).ready(function() {
     function divisão(x, y){
         return x / y;
     }
-    function clear(nmb1, op, nmb2, x){
-        x = 0;
-        nmb1.innerHTML = x;
-        op.innerHTML = "";
-        nmb2.innerHTML = "";
-        return x;
-    }    
 
     /* Comandos */
     $(".btn").click(function(){
-        if(this.textContent === "+" || this.textContent === "-" || this.textContent === "*" || this.textContent === "/"){
+        if(this.textContent === "+"){
+            if(y !== undefined){
+                resolution = soma(resolution,x);
+                res.innerHTML = "="+resolution;
+                nmb2.innerHTML = "";
+                x = 0;
+                nmb1.innerHTML = x;
+                return;
+            }
             y = x;
-            x = "";
+            x = 0;
             nmb1.innerHTML = x;
             nmb2.innerHTML = y;
             op.innerHTML = this.textContent;
             return;
         }
+        if(this.textContent === "-"){
+            if(y !== undefined){
+                resolution = soma(resolution,x);
+                res.innerHTML = "="+resolution;
+                nmb2.innerHTML = "";
+                x = 0;
+                nmb1.innerHTML = x;
+                return;
+            }
+            y = x;
+            x = 0;
+            nmb1.innerHTML = x;
+            nmb2.innerHTML = y;
+            op.innerHTML = this.textContent;
+            return;
+        }
+        if(this.textContent === "*"){
+            if(y !== undefined){
+                resolution = multiplicação(resolution,x);
+                res.innerHTML = "="+resolution;
+                nmb2.innerHTML = "";
+                x = 0;
+                nmb1.innerHTML = x;
+                return;
+            }
+            y = x;
+            x = 0;
+            nmb1.innerHTML = x;
+            nmb2.innerHTML = y;
+            op.innerHTML = this.textContent;
+            return;
+        }
+        if(this.textContent === "/"){
+            if(y !== undefined){
+                resolution = divisão(resolution,x);
+                res.innerHTML = "="+resolution;
+                nmb2.innerHTML = "";
+                x = 0;
+                nmb1.innerHTML = x;
+                return;
+            }
+            y = x;
+            x = 0;
+            nmb1.innerHTML = x;
+            nmb2.innerHTML = y;
+            op.innerHTML = this.textContent;
+            return;
+        }
+        /* Decimal */
         if(this.textContent === "."){
             let test = !!x.match|(/^[.]/);
             if (test === 0){
@@ -52,43 +102,64 @@ $(document).ready(function() {
             }
             return;
         }
+        /* Operação única */
         if(this.textContent === "="){
             if(op.innerHTML === "+"){
                 resolution = soma(x, y);
                 res.innerHTML = "="+resolution;
-                x = clear(nmb1, op, nmb2, x, res);
+                x = 0;
+                y = undefined;
+                nmb1.innerHTML = x;
+                op.innerHTML = "";
+                nmb2.innerHTML = "";
                 return;
             }
             if(op.innerHTML === "-"){
                 resolution = subtração(x, y);
                 res.innerHTML = "="+resolution;
-                x = clear(nmb1, op, nmb2, x, res);
+                x = 0;
+                y = undefined;
+                nmb1.innerHTML = x;
+                op.innerHTML = "";
+                nmb2.innerHTML = "";
                 return;
             }
             if(op.innerHTML === "*"){
                 resolution = multiplicação(x, y);
                 res.innerHTML = "="+resolution;
-                x = clear(nmb1, op, nmb2, x, res);
+                x = 0;
+                y = undefined;
+                nmb1.innerHTML = x;
+                op.innerHTML = "";
+                nmb2.innerHTML = "";
                 return;
             }
             if(op.innerHTML === "/"){
                 resolution = divisão(y, x);
                 res.innerHTML = "="+resolution;
-                x = clear(nmb1, op, nmb2, x, res);
+                x = 0;
+                y = undefined;
+                nmb1.innerHTML = x;
+                op.innerHTML = "";
+                nmb2.innerHTML = "";
                 return;
             }
         }else{
             x += this.textContent;
             x = parseFloat(x);
-            console.log(y);
-            console.log(x);
             nmb1.innerHTML = x;
         }
     });
 
+    /* Botões especiais */
     $(".msc-btn").click(function(){
         if(this.innerHTML === "CLEAR"){
-            x = clear(nmb1, op, nmb2, x, res);
+            x = 0;
+            y = undefined;
+            resolution = 0;
+            nmb1.innerHTML = x;
+            op.innerHTML = "";
+            nmb2.innerHTML = "";
             res.innerHTML = "=";
         }
         if(this.textContent === "ERASE"){
